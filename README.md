@@ -1,5 +1,7 @@
-Admin info:
+Admin info: 
 
 Username: admin
 Password: password
 Email: admin@admin.com
+
+Noele Galindo
