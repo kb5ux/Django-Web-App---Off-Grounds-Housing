@@ -1,4 +1,4 @@
-from __future__ import absolute_import, unicode_literals
+from __future__ import unicode_literals
 from allauth.socialaccount.providers.google.provider import GoogleProvider
 from allauth.socialaccount.tests import OAuth2TestsMixin
 from allauth.tests import MockedResponse
@@ -43,3 +43,33 @@ class GoogleLoginTests(OAuth2TestsMixin, TestCase):
                                             first_name=first_name, last_name=last_name, verified=True))
         test_user = User.objects.get(email=email)
         self.assertNotEqual(test_user.username, "testcase")
+
+# Citations
+
+# Title: Program Talk - Python Examples
+# Author: na
+# Date: 10/18/2021
+# Code version: na
+# URL: https://programtalk.com/python-examples/allauth.tests.MockedResponse/
+# Software License: na
+
+# Title: Django Documentation
+# Author: na
+# Date: 10/18/2021
+# Code version: na
+# URL: https://docs.djangoproject.com/en/3.2/topics/testing/
+# Software License: na
+
+# Title: Django allauth Documentation
+# Author: na
+# Date: 10/18/2021
+# Code version: na
+# URL: https://django-allauth.readthedocs.io/en/latest/
+# Software License: na
+
+
+
+
+
+
+
