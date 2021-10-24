@@ -67,6 +67,13 @@ class GoogleLoginTests(OAuth2TestsMixin, TestCase):
 # URL: https://django-allauth.readthedocs.io/en/latest/
 # Software License: na
 
+# Title: Mocking External API's in Python
+# Author: na
+# Date: 10/18/2021
+# Code version: na
+# URL: https://realpython.com/testing-third-party-apis-with-mocks/
+# Software License: na
+
 
 
 
