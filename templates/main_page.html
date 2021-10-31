@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="container text-center">Welcome to B03 Housing</h1>
+<body>
+<section>
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5">
+          <h1 class="display mb-4">
+            Property Search
+          </h1>
+          <div class="search">
+            <form action="{% url 'search_results' %}">
+              <div class="form-row">
+                <div>
+                  <label>Max Bedrooms</label>
+                  <select name="bedrooms" class="form-control">
+                    <option> 1 </option>
+                    <option> 2 </option>
+                    <option> 3 </option>
+                    <option> 4 </option>
+                    <option> 5 </option>
+                    <option> 6 </option>
+                    <option> 7 </option>
+                    <option> 8 </option>
+                    <option> 9 </option>
+                    <option> 10 </option>
+                      {% if key == values.bedrooms %}
+                        selected
+                      {% endif %}
+                  </select>
+                </div>
+                <div >
+                    <label>Max Bathrooms</label>
+                  <select name="bathrooms" class="form-control">
+                    <option> 1 </option>
+                    <option> 1.5 </option>
+                    <option> 2 </option>
+                    <option> 2.5 </option>
+                    <option> 3 </option>
+                    <option> 3.5 </option>
+                    <option> 4 </option>
+                      {% if key == values.bathrooms %}
+                        selected
+                      {% endif %}
+                  </select>
+                </div>
+                <div >
+                    <label>Max Price</label>
+                  <select name="price" class="form-control">
+                    <option> 600 </option>
+                    <option> 700 </option>
+                    <option> 800 </option>
+                    <option> 900 </option>
+                    <option> 1000 </option>
+                    <option> 1100 </option>
+                    <option> 1200 </option>
+                      {% if key == values.price %}
+                        selected
+                      {% endif %}
+                  </select>
+                </div>
+              </div>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+{% endblock %}
