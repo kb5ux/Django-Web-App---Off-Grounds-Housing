@@ -1,8 +1,11 @@
+from django.contrib import admin
 from django.db import models
-from datetime import datetime
-
+import datetime
 
 # Create your models here.
+from django.utils import timezone
+
+
 class Housing(models.Model):
     title = models.CharField(max_length=200)
     street_address = models.CharField(max_length=150)
@@ -16,7 +19,16 @@ class Housing(models.Model):
     square_feet = models.IntegerField()
     demo_image = models.ImageField()
     is_available = models.BooleanField(default=True)
-    listing_date = models.DateTimeField(default=datetime.now, blank=True)
+    listing_date = models.DateTimeField(default=timezone.now, blank=True)
+
+    @admin.display(
+        boolean=True,
+        ordering='listing_date',
+        description='Published recently?',
+    )
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.listing_date <= now
 
     def __str__(self):
         return self.title
@@ -27,7 +39,7 @@ class Review(models.Model):
     listing_id = models.IntegerField()
     review_description = models.TextField(blank=True)
     review_score = models.DecimalField(max_digits=2, decimal_places=1)
-    review_date = models.DateTimeField(default=datetime.now, blank=True)
+    review_date = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
         return self.title

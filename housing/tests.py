@@ -1,9 +1,51 @@
 from __future__ import unicode_literals
+
+import datetime
+
+from django.urls import reverse
+from django.utils import timezone
+
 from allauth.socialaccount.providers.google.provider import GoogleProvider
 from allauth.socialaccount.tests import OAuth2TestsMixin
 from allauth.tests import MockedResponse
 from django.contrib.auth.models import User
 from django.test import TestCase
+from .models import Housing
+
+
+class HousingModelTest(TestCase):
+    def test_str_representation(self):
+        house = Housing(title="Sample")
+        self.assertEqual(str(house), house.title)
+
+    def test_was_published_recently_with_old_listing(self):
+        time = timezone.now() - datetime.timedelta(days=1, seconds=1)
+        old_listing = Housing(listing_date=time)
+        self.assertIs(old_listing.was_published_recently(), False)
+
+    def test_was_published_recently_with_recent_listing(self):
+        time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        recent_listing = Housing(listing_date=time)
+        self.assertIs(recent_listing.was_published_recently(), True)
+
+    def test_was_published_recently_with_future_listing(self):
+        time = timezone.now() + datetime.timedelta(days=30)
+        future_listing = Housing(listing_date=time)
+        self.assertIs(future_listing.was_published_recently(), False)
+
+
+class MainPageViewTest(TestCase):
+    def test_mainPage(self):
+        response = self.client.get('/housing/')
+        self.assertEqual(response.status_code, 200)
+
+
+class SearchResultsViewTest(TestCase):
+    def test_resultsPage(self):
+        response = self.client.get('/housing/search_results/')
+        self.assertEqual(response.status_code, 200)
+
+
 
 
 # Create your tests here.
@@ -73,10 +115,3 @@ class GoogleLoginTests(OAuth2TestsMixin, TestCase):
 # Code version: na
 # URL: https://realpython.com/testing-third-party-apis-with-mocks/
 # Software License: na
-
-
-
-
-
-
-

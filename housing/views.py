@@ -7,6 +7,7 @@ from django.urls import reverse
 from .models import Housing, Review
 from django.views import generic
 
+
 def main_page(request):
     return render(request, 'main_page.html')
 
@@ -44,9 +45,6 @@ class ListingListView(generic.ListView):
 
     def get_queryset(self):
         return Housing.objects.all()
-
-
-
 
     '''
     A method for it we want to post information for a listing that is not from the admin webiste
