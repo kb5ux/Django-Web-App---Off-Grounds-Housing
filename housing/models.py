@@ -17,7 +17,6 @@ class Housing(models.Model):
     bedrooms = models.IntegerField()
     bathrooms = models.DecimalField(max_digits=2, decimal_places=1)  # Can have 1.5 baths
     square_feet = models.IntegerField()
-    demo_image = models.ImageField()
     is_available = models.BooleanField(default=True)
     listing_date = models.DateTimeField(default=timezone.now, blank=True)
 
