@@ -7,8 +7,6 @@ from django.urls import reverse
 from .models import Housing, Review
 from django.views import generic
 
-
-
 def main_page(request):
     return render(request, 'main_page.html')
 
@@ -37,7 +35,6 @@ def search_results(request):
     }
 
     return render(request, 'search_results.html', context)
-
 
 
 class ListingListView(generic.ListView):

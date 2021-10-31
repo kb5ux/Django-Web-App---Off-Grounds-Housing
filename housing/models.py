@@ -32,7 +32,6 @@ class Review(models.Model):
     def __str__(self):
         return self.title
 
-
 class RentalCompany(models.Model):
     name = models.CharField(max_length=150)
     email = models.CharField(max_length=150)
