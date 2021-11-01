@@ -63,3 +63,6 @@ class ListingListView(generic.ListView):
               'error_message': "You didn't enter a listing."})
         return HttpResponseRedirect(reverse('housing:listing'))
 '''
+
+def housing_map(request):
+    return render(request, 'map.html', {})
