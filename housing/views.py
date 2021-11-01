@@ -63,3 +63,7 @@ class ListingListView(generic.ListView):
               'error_message': "You didn't enter a listing."})
         return HttpResponseRedirect(reverse('housing:listing'))
 '''
+
+def housing_map(request):
+    mapbox_access_token = 'pk.my_mapbox_access_token'
+    return render(request, 'map.html', { 'mapbox_access_token': mapbox_access_token })
