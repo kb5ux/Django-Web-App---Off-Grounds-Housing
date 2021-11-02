@@ -130,6 +130,9 @@ SITE_ID = 3
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

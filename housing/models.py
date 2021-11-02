@@ -19,6 +19,7 @@ class Housing(models.Model):
     square_feet = models.IntegerField()
     is_available = models.BooleanField(default=True)
     listing_date = models.DateTimeField(default=timezone.now, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='images/')
 
     @admin.display(
         boolean=True,
