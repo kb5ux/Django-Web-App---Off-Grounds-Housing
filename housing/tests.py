@@ -45,8 +45,22 @@ class SearchResultsViewTest(TestCase):
         response = self.client.get('/housing/search_results/')
         self.assertEqual(response.status_code, 200)
 
+class ListingPageViewTest(TestCase):
+    def test_listingPage(self):
+        response = self.client.get('/housing/listing/')
+        self.assertEqual(response.status_code, 200)
 
+class ListingPageTest(TestCase):
+    def test_incorrectimage(self):
+        example_listing = Housing(title='Preston Apartments',
+                                  image='https://img.offcampusimages.com/WgKq5tNLRIlQ_LylG-6iNPg4_U8=/660x440/left/top/smart/images/ecuyiiqoqaipb7j_op5cirqf4hphpcvvltyry0an_xu.jpeg')
+        self.assertNotEqual(example_listing.image, 'https://img.offcampusimages.com/jWIDBfVflruISincDyFIjbhOMN4=/660x440/left/top/smart/images/mytnhdxke4fzlwt2qojoi5pprmokqbwia293dmuna2s.jpeg')
 
+    def test_correctprice(self):
+        another_example = Housing(title="Grandmarc at the Corner 4 Bedroom", price=900, street_address='301 15th St NW',
+                                  city='Charlottesville', bedrooms=4, bathrooms=2)
+        price_listing = another_example.price
+        self.assertEqual(price_listing, 900)
 
 # Create your tests here.
 class GoogleLoginTests(OAuth2TestsMixin, TestCase):
@@ -114,4 +128,11 @@ class GoogleLoginTests(OAuth2TestsMixin, TestCase):
 # Date: 10/18/2021
 # Code version: na
 # URL: https://realpython.com/testing-third-party-apis-with-mocks/
+# Software License: na
+
+# Title: Python Django Tutorial: Full-Featured Web App Part 8 - User Profile and Picture
+# Author: Corey Schafer
+# Date: 08/31/2018
+# Code version: na
+# URL: https://www.youtube.com/watch?v=FdVuKt_iuSI&t=136s
 # Software License: na
