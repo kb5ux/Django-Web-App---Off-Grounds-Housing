@@ -51,10 +51,10 @@ class ListingPageViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 class ListingPageTest(TestCase):
-    #def test_incorrectimage(self):
-        #example_listing = Housing(title='Preston Apartments',
-                #                 image='https://img.offcampusimages.com/WgKq5tNLRIlQ_LylG-6iNPg4_U8=/660x440/left/top/smart/images/ecuyiiqoqaipb7j_op5cirqf4hphpcvvltyry0an_xu.jpeg')
-      #  self.assertNotEqual(example_listing.image, 'https://img.offcampusimages.com/jWIDBfVflruISincDyFIjbhOMN4=/660x440/left/top/smart/images/mytnhdxke4fzlwt2qojoi5pprmokqbwia293dmuna2s.jpeg')
+    def test_incorrectimage(self):
+        example_listing = Housing(title='Preston Apartments',
+        image='https://img.offcampusimages.com/WgKq5tNLRIlQ_LylG-6iNPg4_U8=/660x440/left/top/smart/images/ecuyiiqoqaipb7j_op5cirqf4hphpcvvltyry0an_xu.jpeg')
+        self.assertNotEqual(example_listing.image, 'https://img.offcampusimages.com/jWIDBfVflruISincDyFIjbhOMN4=/660x440/left/top/smart/images/mytnhdxke4fzlwt2qojoi5pprmokqbwia293dmuna2s.jpeg')
 
     def test_correctprice(self):
         another_example = Housing(title="Grandmarc at the Corner 4 Bedroom", price=900, street_address='301 15th St NW',
