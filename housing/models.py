@@ -6,6 +6,9 @@ import datetime
 from django.utils import timezone
 
 
+
+
+
 class Housing(models.Model):
     title = models.CharField(max_length=200)
     street_address = models.CharField(max_length=150)
@@ -33,16 +36,18 @@ class Housing(models.Model):
     def __str__(self):
         return self.title
 
-
 class Review(models.Model):
-    title = models.CharField(max_length=200)
-    listing_id = models.IntegerField()
+    #listing = models.ForeignKey(Housing, on_delete=models.CASCADE)
+    review_title = models.CharField(max_length=200)
     review_description = models.TextField(blank=True)
     review_score = models.DecimalField(max_digits=2, decimal_places=1)
     review_date = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.review_title
+
+
+
 
 class RentalCompany(models.Model):
     name = models.CharField(max_length=150)

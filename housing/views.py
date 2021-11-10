@@ -37,6 +37,11 @@ def search_results(request):
 
     return render(request, 'search_results.html', context)
 
+def reviews(request):
+
+
+    return render(request, 'reviews.html')
+
 
 class ListingListView(generic.ListView):
     model = Housing
@@ -46,19 +51,36 @@ class ListingListView(generic.ListView):
     def get_queryset(self):
         return Housing.objects.all()
 
-    def post(self):
-        street_address = self.POST.get('street address')
-        # if not(street_address):
-        # return HttpResponseRedirect(reverse('housing'))
-        try:
-            one_listing = Housing(street_address=street_address)
-            one_listing.save()
-        except(KeyError, Housing.DoesNotExist):
-            return render(self, 'housing.html', {
-                'error_message': "You didn't enter a listing."})
-        return HttpResponseRedirect(reverse('housing:listing'))
+
 
 
 def housing_map(request):
     mapbox_access_token = 'pk.my_mapbox_access_token'
     return render(request, 'map.html', {'mapbox_access_token': mapbox_access_token})
+
+
+def post(request):
+    review_title = request.POST.get('review_title')
+    review_description = request.POST.get('review_description')
+    if not(review_title and review_description):
+        return HttpResponseRedirect(reverse('review'))
+    try:
+        review = Review(review_title=review_title, review_description=review_description)
+        review.save()
+    except(KeyError, Review.DoesNotExist):
+        return render(request, 'submit_review.html', {
+          'error_message': "You did not leave a review."})
+    return HttpResponseRedirect(reverse('reviews_list'))
+
+
+class ReviewsListView(generic.ListView):
+    model = Review
+    context_object_name = "reviews"
+    template_name = 'reviews.html'
+
+    def get_queryset(self):
+        return Review.objects.all()
+
+class SubmitReviewView(generic.ListView):
+    model = Review
+    template_name = 'submit_review.html'
