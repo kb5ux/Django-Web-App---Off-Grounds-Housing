@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div>
+        <div>
+        <div>
+            <div>
+            </div>
+            <div >
+                <h3 class="text-center">
+                   <p>{{ listing.title }}</p>
+                </h3>
+                 <div class="content-section" align="center">
+                        <div class="media">
+                            {% if listing.image %}
+                                <img src="{{ listing.image.url }}" width="250",height="250">
+                            {% endif %}
+                        </div>
+                 </div>
+                <h5 class="text-center">Street Address: {{ listing.street_address }}</h5>
+                <div>
+                      <i></i> Description: {{ listing.description }}
+                </div>
+                <div>
+                    <i></i> Bedrooms: {{ listing.bedrooms }}
+                </div>
+                <div>
+                    <i></i> Bathrooms: {{ listing.bathrooms }}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <br>
+    <div>
+        <div>
+            <h3 class="text-center">Add Review</h3>
+            <form action="{% url 'add_Review' listing.id %}" method="POST">
+                {% csrf_token %}
+                <label for="description">Review</label>
+                <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
+
+                <label for="rangeInput">Rating</label>
+                <input type="range" id="rangeInput"
+                    name="rating" min="0" max="10" value="0" step="0.5"
+                    oninput="amount.value=rangeInput.value">
+
+         <output name="amount" id="amount" for="rangeInput">0</output>
+
+                <br>
+                <input type="submit" class="btn btn-danger" value="Add Review">
+            </form>
+        </div>
+    </div>
+    <br>
+    <div>
+        <div>
+            <h3 class="text-center">Reviews</h3>
+            {% if review %}
+                {% for review in reviews %}
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <h5>{{ review.title }}</h5>
+                                    <h5>{{ review.rating }}</h5>
+                                </div>
+                                <div>
+                                    <p>{{ review.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <br>
+                {% endfor %}
+            {% else %}
+            <div>
+                <p class="text-center"> NO REVIEWS AVAILABLE </p>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

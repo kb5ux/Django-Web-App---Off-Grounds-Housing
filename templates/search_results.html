@@ -18,6 +18,13 @@
                 <div>
                   <div>
                     <h4 class="text-center">{{ listing.title }}</h4>
+                     <div class="content-section" align="center">
+                        <div class="media">
+                            {% if listing.image %}
+                                <img src="{{ listing.image.url }}" width="250",height="250">
+                            {% endif %}
+                        </div>
+                    </div>
                     <p class="text-center">
                       <i></i> {{ listing.street_address }}</p>
                     <p class="text-center">
@@ -27,13 +34,12 @@
                   <div>
                     <div>
                       <p class="text-center"> Description: {{ listing.description }}</p>
-                      <i></i> Sqft: {{ listing.square_feet }}</div>
-                  </div>
+                    </div>
+                    <div class="text-center">
+                      <a href="{% url 'listing_details' listing.id %}">More Details</a>
+                    </div>
                   <div>
                     <div>
-                      <i></i> Bedrooms: {{ listing.bedrooms }}</div>
-                    <div>
-                      <i></i> Bathrooms: {{ listing.bathrooms }}</div>
                   </div>
                   <hr>
                   <div>
