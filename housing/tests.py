@@ -48,7 +48,7 @@ class SearchResultsViewTest(TestCase):
 
 class ListingPageViewTest(TestCase):
     def test_listingPage(self):
-        response = self.client.get('/housing/listing/')
+        response = self.client.get('/housing/listings/')
         self.assertEqual(response.status_code, 200)
 
 
