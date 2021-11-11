@@ -1,19 +1,19 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.db.models import Avg
+from django.shortcuts import render, redirect
+from django.http import  HttpResponseRedirect
 from django.urls import reverse
 
-from .models import Housing, Review
+from .forms import ReviewForm
+from .models import Listing, Review
 from django.views import generic
 
 
-def main_page(request):
-    return render(request, 'main_page.html')
+def home_page(request):
+    return render(request, 'home_page.html')
 
 
 def search_results(request):
-    queryset_list = Housing.objects.order_by('-listing_date')
+    queryset_list = Listing.objects.order_by('-listing_date')
 
     if 'bedrooms' in request.GET:
         bedrooms = request.GET['bedrooms']
@@ -37,21 +37,14 @@ def search_results(request):
 
     return render(request, 'search_results.html', context)
 
-def reviews(request):
-
-
-    return render(request, 'reviews.html')
-
 
 class ListingListView(generic.ListView):
-    model = Housing
+    model = Listing
     template_name = 'housing.html'
     context_object_name = 'listings'
 
     def get_queryset(self):
-        return Housing.objects.all()
-
-
+        return Listing.objects.all()
 
 
 def housing_map(request):
@@ -59,28 +52,38 @@ def housing_map(request):
     return render(request, 'map.html', {'mapbox_access_token': mapbox_access_token})
 
 
-def post(request):
-    review_title = request.POST.get('review_title')
-    review_description = request.POST.get('review_description')
-    if not(review_title and review_description):
-        return HttpResponseRedirect(reverse('review'))
-    try:
-        review = Review(review_title=review_title, review_description=review_description)
-        review.save()
-    except(KeyError, Review.DoesNotExist):
-        return render(request, 'submit_review.html', {
-          'error_message': "You did not leave a review."})
-    return HttpResponseRedirect(reverse('reviews_list'))
+def add_Review(request, id):
+    listing = Listing.objects.get(id=id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST or None)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.description = request.POST["description"]
+            data.rating = request.POST["rating"]
+            data.listing = listing
+            data.save()
+            return redirect("listing_details", id)
+        else:
+            form = ReviewForm()
+    return render(request, 'listing_details.html', {"form": form})
 
 
-class ReviewsListView(generic.ListView):
-    model = Review
-    context_object_name = "reviews"
-    template_name = 'reviews.html'
+def ListingDetails(request, id):
+    listing = Listing.objects.get(id=id)
+    reviews = Review.objects.filter(listing=id).order_by("-description")
+    average_rating = reviews.aggregate(Avg("rating" ))["rating__avg"]
 
-    def get_queryset(self):
-        return Review.objects.all()
+    if average_rating is None:
+        average_rating = 0
+    average_rating = round(average_rating, 2)
+    context = {
+        "listing": listing,
+        "reviews": reviews,
+        "average_rating": average_rating
+    }
+    return render(request, 'listing_details.html', context)
 
-class SubmitReviewView(generic.ListView):
-    model = Review
-    template_name = 'submit_review.html'
+
+
+
+
