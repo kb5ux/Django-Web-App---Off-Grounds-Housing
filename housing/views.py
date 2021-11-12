@@ -1,6 +1,6 @@
 from django.db.models import Avg
 from django.shortcuts import render, redirect
-from django.http import  HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from .forms import ReviewForm
@@ -62,10 +62,10 @@ def add_Review(request, id):
             data.rating = request.POST["rating"]
             data.listing = listing
             data.save()
-            return redirect("listing_details", id)
+            return redirect(reverse("housing:listing_details", id))
         else:
             form = ReviewForm()
-    return render(request, 'listing_details.html', {"form": form})
+    return render(request, 'listing_details.html', {'form': form, 'listing.id': id})
 
 
 def ListingDetails(request, id):
