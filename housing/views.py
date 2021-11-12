@@ -52,7 +52,23 @@ def housing_map(request):
     return render(request, 'map.html', {'mapbox_access_token': mapbox_access_token})
 
 
-def add_Review(request, id):
+def ListingDetails(request, id):
+    listing = Listing.objects.get(id=id)
+    reviews = Review.objects.filter(listing=id).order_by("-description")
+    average_rating = reviews.aggregate(Avg("rating"))["rating__avg"]
+
+    if average_rating is None:
+        average_rating = 0
+    average_rating = round(average_rating, 2)
+    context = {
+        "listing": listing,
+        "reviews": reviews,
+        "average_rating": average_rating
+    }
+    return render(request, 'listing_details.html', context)
+
+
+def add_review(request, id):
     listing = Listing.objects.get(id=id)
     if request.method == "POST":
         form = ReviewForm(request.POST or None)
@@ -65,23 +81,8 @@ def add_Review(request, id):
             return redirect(reverse("housing:listing_details", id))
         else:
             form = ReviewForm()
-    return render(request, 'listing_details.html', {'form': form, 'listing.id': id})
+    return render(request, 'listing_details.html', {'form': form, "listing": listing})
 
-
-def ListingDetails(request, id):
-    listing = Listing.objects.get(id=id)
-    reviews = Review.objects.filter(listing=id).order_by("-description")
-    average_rating = reviews.aggregate(Avg("rating" ))["rating__avg"]
-
-    if average_rating is None:
-        average_rating = 0
-    average_rating = round(average_rating, 2)
-    context = {
-        "listing": listing,
-        "reviews": reviews,
-        "average_rating": average_rating
-    }
-    return render(request, 'listing_details.html', context)
 
 
 
