@@ -37,7 +37,7 @@ class Listing(models.Model):
 class Review(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    rating = models.DecimalField(max_digits=3, decimal_places=1)
 
     def __str__(self):
         return self.description
