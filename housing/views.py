@@ -89,20 +89,7 @@ def ListingDetails(request, id):
     return render(request, 'listing_details.html', context)
 
 
-def add_review(request, id):
-    listing = Listing.objects.get(id=id)
-    if request.method == "POST":
-        form = ReviewForm(request.POST or None)
-        if form.is_valid():
-            data = form.save(commit=False)
-            data.description = request.POST["description"]
-            data.rating = request.POST["rating"]
-            data.listing = listing
-            data.save()
-            return redirect(reverse("housing:listing_details", id))
-        else:
-            form = ReviewForm()
-    return render(request, 'listing_details.html', {'form': form, "listing": listing})
+
 
 
 
