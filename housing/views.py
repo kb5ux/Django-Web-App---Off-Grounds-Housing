@@ -52,6 +52,27 @@ def housing_map(request):
     return render(request, 'map.html', {'mapbox_access_token': mapbox_access_token})
 
 
+def add_Review(request, id):
+    listing = Listing.objects.get(id=id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST or None)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.description = request.POST["description"]
+            data.rating = request.POST["rating"]
+            data.listing = listing
+            data.save()
+            return redirect("listing_details", id)
+        else:
+            form = ReviewForm()
+        context = {
+            "form": form,
+            "listing": listing,
+            "reviews": form,
+        }
+    return render(request, 'listing_details.html', context)
+
+
 def ListingDetails(request, id):
     listing = Listing.objects.get(id=id)
     reviews = Review.objects.filter(listing=id).order_by("-description")
