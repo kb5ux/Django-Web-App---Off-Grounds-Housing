@@ -1,6 +1,6 @@
 from django.db.models import Avg
 from django.shortcuts import render, redirect
-from django.http import  HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from .forms import ReviewForm
@@ -76,7 +76,7 @@ def add_Review(request, id):
 def ListingDetails(request, id):
     listing = Listing.objects.get(id=id)
     reviews = Review.objects.filter(listing=id).order_by("-description")
-    average_rating = reviews.aggregate(Avg("rating" ))["rating__avg"]
+    average_rating = reviews.aggregate(Avg("rating"))["rating__avg"]
 
     if average_rating is None:
         average_rating = 0
@@ -87,6 +87,23 @@ def ListingDetails(request, id):
         "average_rating": average_rating
     }
     return render(request, 'listing_details.html', context)
+
+
+def add_review(request, id):
+    listing = Listing.objects.get(id=id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST or None)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.description = request.POST["description"]
+            data.rating = request.POST["rating"]
+            data.listing = listing
+            data.save()
+            return redirect(reverse("housing:listing_details", id))
+        else:
+            form = ReviewForm()
+    return render(request, 'listing_details.html', {'form': form, "listing": listing})
+
 
 
 
