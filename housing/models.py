@@ -36,12 +36,11 @@ class Listing(models.Model):
 
 class Review(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
 
     def __str__(self):
-        return self.title
+        return self.description
 
 
 class RentalCompany(models.Model):

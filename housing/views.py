@@ -65,7 +65,12 @@ def add_Review(request, id):
             return redirect("listing_details", id)
         else:
             form = ReviewForm()
-    return render(request, 'listing_details.html', {"form": form})
+        context = {
+            "form": form,
+            "listing": listing,
+            "reviews": form,
+        }
+    return render(request, 'listing_details.html', context)
 
 
 def ListingDetails(request, id):

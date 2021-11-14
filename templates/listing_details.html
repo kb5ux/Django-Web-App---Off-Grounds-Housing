@@ -31,6 +31,9 @@
                 <div>
                     <i></i> Bathrooms: {{ listing.bathrooms }}
                 </div>
+                <div>
+                    <h5 class="text-center"> Rating: {{ average_rating }}</h5>
+                </div>
             </div>
         </div>
     </div>
@@ -61,28 +64,17 @@
     <div>
         <div>
             <h3 class="text-center">Reviews</h3>
-            {% if review %}
                 {% for review in reviews %}
                     <div>
-                        <div>
-                            <div>
-                                <div>
-                                    <h5>{{ review.title }}</h5>
-                                    <h5>{{ review.rating }}</h5>
-                                </div>
-                                <div>
-                                    <p>{{ review.description }}</p>
-                                </div>
-                            </div>
-                        </div>
+                       <h5> {{ review.description }} - {{ review.rating }} </h5>
+                        <h5> </h5>
                     </div>
                 <br>
                 {% endfor %}
-            {% else %}
-            <div>
-                <p class="text-center"> NO REVIEWS AVAILABLE </p>
-            </div>
-        {% endif %}
+        </div>
+        <div class="fixed-bottom">
+            <a href="{% url 'listing' %}" class = "btn btn-warning btn-rounded">Back to Browse Listings</a>
+
         </div>
     </div>
 </div>
