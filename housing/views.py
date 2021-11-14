@@ -44,7 +44,7 @@ class ListingListView(generic.ListView):
     context_object_name = 'listings'
 
     def get_queryset(self):
-        return Listing.objects.all()
+        return Listing.objects.order_by('-listing_date')
 
 
 def housing_map(request):
