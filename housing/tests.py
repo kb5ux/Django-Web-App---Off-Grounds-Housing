@@ -10,7 +10,7 @@ from allauth.socialaccount.tests import OAuth2TestsMixin
 from allauth.tests import MockedResponse
 from django.contrib.auth.models import User
 from django.test import TestCase
-from .models import Listing
+from .models import Listing, Review
 
 
 class ListingModelTest(TestCase):
@@ -65,6 +65,27 @@ class ListingPageTest(TestCase):
                                   city='Charlottesville', bedrooms=4, bathrooms=2, square_feet=2000)
         price_listing = another_example.price
         self.assertEqual(price_listing, 900)
+
+
+class AddReviewTest(TestCase):
+    def test_correctrating(self):
+        location = Listing(title="Grandmarc at the Corner 4 Bedroom", price=900, street_address='301 15th St NW',
+                                  city='Charlottesville', bedrooms=4, bathrooms=2, square_feet=2000)
+        review_added = Review(listing=location, description="This place sucks!", rating=1.5)
+        self.assertEqual(review_added.rating, 1.5)
+
+    def test_correct_review_url(self):
+        new_location_test = Listing(title='Beta Bridge Apartments',
+                                  bedrooms=4, square_feet=3000, price=850)
+        new_review = Review(listing=new_location_test, description="I had many issues with the rental company", rating=2.0)
+        self.assertNotEqual(new_review.description, '')
+
+    def test_wrong_decimals(self):
+        location_three = Listing(title='Beta Bridge Apartments',
+                                  bedrooms=4, square_feet=3000, price=850)
+        new_review_three = Review(listing=location_three, description="I had many issues with the rental company", rating=2.034)
+        max_digits = new_review_three._meta.get_field('rating').max_digits
+        self.assertEqual(max_digits, 3)
 
 
 # Create your tests here.
