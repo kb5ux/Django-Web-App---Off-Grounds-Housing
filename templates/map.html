@@ -16,6 +16,35 @@
             center: [-78.5080, 38.0336],
             zoom: 13
         });
+
+        /* 
+          Add an event listener that runs
+          when a user clicks on the map element.
+        */
+        map.on('click', (event) => {
+          // If the user clicked on one of your markers, get its information.
+          const features = map.queryRenderedFeatures(event.point, {
+            layers: ['houses'] // replace with your layer name
+          });
+          if (!features.length) {
+            return;
+          }
+          const feature = features[0];
+
+          /* 
+            Create a popup, specify its options 
+            and properties, and add it to the map.
+          */
+        const popup = new mapboxgl.Popup({ offset: [0, -5] })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(
+            `<h3>${feature.properties.place_name}</h3>
+            <p><strong>Description: </strong>${feature.properties.description}</p>
+            <p><strong>Bedrooms: </strong>${feature.properties.bedrooms}</p>
+            <p><strong>Bathrooms: </strong>${feature.properties.Bathrooms}</p>`
+          )
+          .addTo(map);
+        });
    </script>
   </body>
 </html>
