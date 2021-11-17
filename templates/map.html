@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UVA Housing Map</title>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
+  </head>
+  <body>
+   <h1 style='text-align: center'>UVA Housing Map</h1>
+   <div id='map' style='width: 99vw; height: 90vh;'></div>
+   <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibW92ZXMiLCJhIjoiY2tsNW5jZzhiMHp3bzJ4bWdvbnhpOTJodCJ9.Q8hOQlRCi5scPFvkHs60cw';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/moves/ckw02kjx01a6u14p67rw7tfni',
+            center: [-78.5080, 38.0336],
+            zoom: 13
+        });
+
+        /* 
+          Add an event listener that runs
+          when a user clicks on the map element.
+        */
+        map.on('click', (event) => {
+          // If the user clicked on one of your markers, get its information.
+          const features = map.queryRenderedFeatures(event.point, {
+            layers: ['houses'] // replace with your layer name
+          });
+          if (!features.length) {
+            return;
+          }
+          const feature = features[0];
+          /* 
+            Create a popup, specify its options 
+            and properties, and add it to the map.
+          */
+        const popup = new mapboxgl.Popup({ offset: [0, -5] })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(
+            `<h3>${feature.properties.place_name}</h3>
+            <p><strong>Description: </strong>${feature.properties.description}</p>
+            <p><strong>Bedrooms: </strong>${feature.properties.bedrooms}</p>
+            <p><strong>Bathrooms: </strong>${feature.properties.Bathrooms}</p>
+            <a href="/housing/listings/details/${feature.properties.id}">More Details</a>`
+          )
+          .addTo(map);
+        });
+   </script>
+  </body>
+</html>

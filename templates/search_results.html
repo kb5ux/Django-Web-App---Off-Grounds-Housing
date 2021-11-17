@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %} | Search Results {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+      <div class="row">
+        {% if listings %}
+          {% for listing in listings %}
+          <div>
+              <div>
+                <div>
+                  <h2>
+                    <span>${{ listing.price }}</span>
+                  </h2>
+                </div>
+                <div>
+                  <div>
+                    <h4 class="text-center">{{ listing.title }}</h4>
+                     <div class="content-section" align="center">
+                        <div class="media">
+                            {% if listing.image %}
+                                <img src="{{ listing.image.url }}" width="250",height="250">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p class="text-center">
+                      <i></i> {{ listing.street_address }}</p>
+                    <p class="text-center">
+                      <i class="text-secondary"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
+                  </div>
+                  <hr>
+                  <div>
+                    <div>
+                      <p class="text-center"> Description: {{ listing.description }}</p>
+                    </div>
+                    <div class="text-center">
+                      <a href="{% url 'listing_details' listing.id %}">More Details</a>
+                    </div>
+                  <div>
+                    <div>
+                  </div>
+                  <hr>
+                  <div>
+                    <div>
+                      </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div>
+            <h1 class="text-center">No Listings Available For Selected Criteria</h1>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
