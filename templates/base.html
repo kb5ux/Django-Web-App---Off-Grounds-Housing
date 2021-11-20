@@ -9,6 +9,35 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   </head>
 
+  <!-- Found at https://stackoverflow.com/questions/26819675/navbar-highlight-for-current-page-->
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function(){
+            $('a').each(function(){
+                if ($(this).prop('href') == window.location.href) {
+                    $(this).addClass('active'); $(this).parents('li').addClass('active');
+                }
+            });
+        });
+    </script>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">UVA Off-Grounds Housing</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a  class="nav-link "  href= "{%url 'home_page' %}">Search for Listings</a>
+        <a  class="nav-link "  href= "{%url 'listing' %}">Browse Listings</a>
+        <a  class="nav-link" href= "{%url 'map' %}">Map View</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
     {% load bootstrap5 %}
     <div class="container">
       {% block content %}

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+{% extends 'base.html' %}
+
+{% block content %}
+
   <head>
     <title>UVA Housing Map</title>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
@@ -47,4 +51,5 @@
         });
    </script>
   </body>
+    {% endblock %}
 </html>
