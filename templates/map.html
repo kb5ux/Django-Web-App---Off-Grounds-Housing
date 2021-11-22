@@ -41,7 +41,8 @@
         const popup = new mapboxgl.Popup({ offset: [0, -5] })
           .setLngLat(feature.geometry.coordinates)
           .setHTML(
-            `<h3>${feature.properties.place_name}</h3>
+            `<h3>${feature.properties.title}</h3>
+            <p><strong>Location: </strong>${feature.properties.place_name}</p>
             <p><strong>Description: </strong>${feature.properties.description}</p>
             <p><strong>Bedrooms: </strong>${feature.properties.bedrooms}</p>
             <p><strong>Bathrooms: </strong>${feature.properties.Bathrooms}</p>
