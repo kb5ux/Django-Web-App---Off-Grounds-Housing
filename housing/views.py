@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
@@ -87,12 +88,3 @@ def ListingDetails(request, id):
         "average_rating": average_rating
     }
     return render(request, 'listing_details.html', context)
-
-
-
-
-
-
-
-
-
