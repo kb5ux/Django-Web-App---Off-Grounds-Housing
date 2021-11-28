@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 {% block content %}
 <h1 class="container text-center">Search for UVA Off-Grounds Housing Options</h1>
 <body>
 <section>
+  {% if user.is_authenticated %}
     <div class="container text-center">
       <div class="home-search p-5">
         <div class="overlay p-5">
@@ -69,6 +71,9 @@
         </div>
       </div>
     </div>
+  {% else %}
+            <a href="{% provider_login_url 'google' %}">Login With Google To Use Search Feature</a>
+  {% endif %}
   </section>
 
 
