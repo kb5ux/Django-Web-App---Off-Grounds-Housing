@@ -4,8 +4,8 @@
 
 {% block content %}
 <section>
-    <div class="container">
-      <div class="row">
+    <div class="w3-container">
+      <div class="w3-row">
         {% if listings %}
           {% for listing in listings %}
           <div>
@@ -17,7 +17,7 @@
                 </div>
                 <div>
                   <div>
-                    <h4 class="text-center">{{ listing.title }}</h4>
+                    <h4 class="w3-center">{{ listing.title }}</h4>
                      <div class="content-section" align="center">
                         <div class="media">
                             {% if listing.image %}
@@ -25,9 +25,9 @@
                             {% endif %}
                         </div>
                     </div>
-                    <p class="text-center">
+                    <p class="w3-center">
                       <i></i> {{ listing.street_address }}</p>
-                    <p class="text-center">
+                    <p class="w3-center">
                       <i class="text-secondary"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
                   </div>
                   <hr>
