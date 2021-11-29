@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -109,6 +110,46 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# uri to report policy violations
+# uri to report policy violations
+CSP_REPORT_URI = '<add your reporting uri>'
+
+# default source as self
+CSP_DEFAULT_SRC = ("'self'",)
+
+# style from our domain and bootstrapcdn
+CSP_STYLE_SRC = ("'self'",
+                 "stackpath.bootstrapcdn.com")
+
+# scripts from our domain and other domains
+CSP_SCRIPT_SRC = ("'self'",
+                  "ajax.cloudflare.com",
+                  "static.cloudflareinsights.com",
+                  "www.google-analytics.com",
+                  "ssl.google-analytics.com",
+                  "cdn.ampproject.org",
+                  "www.googletagservices.com",
+                  "pagead2.googlesyndication.com")
+
+# images from our domain and other domains
+CSP_IMG_SRC = ("'self'",
+               "www.google-analytics.com",
+               "raw.githubusercontent.com",
+               "googleads.g.doubleclick.net")
+
+# loading manifest, workers, frames, etc
+CSP_FONT_SRC = ("'self'",)
+CSP_CONNECT_SRC = ("'self'",
+                   "www.google-analytics.com")
+CSP_OBJECT_SRC = ("'self'",)
+CSP_BASE_URI = ("'self'",)
+CSP_FRAME_ANCESTORS = ("'self'",)
+CSP_FORM_ACTION = ("'self'",)
+CSP_INCLUDE_NONCE_IN = ('script-src',)
+CSP_MANIFEST_SRC = ("'self'",)
+CSP_WORKER_SRC = ("'self'",)
+CSP_MEDIA_SRC = ("'self'",)
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -128,7 +169,6 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 3
 
-SECURE_SSL_REDIRECT = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
