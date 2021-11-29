@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-*9t#j#wv7)!2o@n3ftsdp_j^$9wxe_w(80fi(n=3z*h7ea3qno
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'b03project.herokuapp.com']
-
+CSRF_COOKIE_SECURE = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,7 +51,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'csp.middleware.CSPMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -110,45 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# uri to report policy violations
-# uri to report policy violations
-CSP_REPORT_URI = '<add your reporting uri>'
-
-# default source as self
-CSP_DEFAULT_SRC = ("'self'",)
-
-# style from our domain and bootstrapcdn
-CSP_STYLE_SRC = ("'self'",
-                 "stackpath.bootstrapcdn.com")
-
-# scripts from our domain and other domains
-CSP_SCRIPT_SRC = ("'self'",
-                  "ajax.cloudflare.com",
-                  "static.cloudflareinsights.com",
-                  "www.google-analytics.com",
-                  "ssl.google-analytics.com",
-                  "cdn.ampproject.org",
-                  "www.googletagservices.com",
-                  "pagead2.googlesyndication.com")
-
-# images from our domain and other domains
-CSP_IMG_SRC = ("'self'",
-               "www.google-analytics.com",
-               "raw.githubusercontent.com",
-               "googleads.g.doubleclick.net")
-
-# loading manifest, workers, frames, etc
-CSP_FONT_SRC = ("'self'",)
-CSP_CONNECT_SRC = ("'self'",
-                   "www.google-analytics.com")
-CSP_OBJECT_SRC = ("'self'",)
-CSP_BASE_URI = ("'self'",)
-CSP_FRAME_ANCESTORS = ("'self'",)
-CSP_FORM_ACTION = ("'self'",)
-CSP_INCLUDE_NONCE_IN = ('script-src',)
-CSP_MANIFEST_SRC = ("'self'",)
-CSP_WORKER_SRC = ("'self'",)
-CSP_MEDIA_SRC = ("'self'",)
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
