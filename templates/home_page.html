@@ -1,7 +1,105 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
 {% block content %}
-<h1 class="container text-center">Search for UVA Off-Grounds Housing Options</h1>
+
+<!-- Taken from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_transparent_bottom -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+}
+
+.container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container img {vertical-align: middle;}
+
+.container .content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+</style>
+</head>
+<!-- found at https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_inline_form -->
+
+<body>
+
+<style>
+body {font-family:"Poppins", sans-serif;}
+* {box-sizing: border-box;}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+</style>
+</head>
+
+
+
+
+
+<div class="container">
+  <img src="/media/images/uva4.png" style="width:100%;">
+  <div class="content">
+    <h1>Search for Properties</h1>
+  </div>
+</div>
+
+</body>
+
+
+<h1 class="container text-center"></h1>
 <body>
 <section>
   {% if user.is_authenticated %}
@@ -9,12 +107,10 @@
       <div class="home-search p-5">
         <div class="overlay p-5">
           <h1 class="display mb-4">
-            Property Search
           </h1>
           <div class="search">
-            <form action="{% url 'search_results' %}">
-              <div class="form-row">
-                <div>
+            <form class="form-inline" action="{% url 'search_results' %}">
+
                   <label>Max Bedrooms</label>
                   <select name="bedrooms" class="form-control">
                     <option> 1 </option>
@@ -31,8 +127,7 @@
                         selected
                       {% endif %}
                   </select>
-                </div>
-                <div >
+
                     <label>Max Bathrooms</label>
                   <select name="bathrooms" class="form-control">
                     <option> 1 </option>
@@ -46,8 +141,8 @@
                         selected
                       {% endif %}
                   </select>
-                </div>
-                <div >
+
+
                     <label>Max Price</label>
                   <select name="price" class="form-control">
                     <option> 600 </option>
@@ -63,8 +158,7 @@
                         selected
                       {% endif %}
                   </select>
-                </div>
-              </div>
+
               <button type="submit">Submit</button>
             </form>
           </div>
@@ -75,10 +169,6 @@
             <a href="{% provider_login_url 'google' %}">Login With Google To Use Search Feature</a>
   {% endif %}
   </section>
-
-
-</div>
-
 </body>
 
 {% endblock %}
