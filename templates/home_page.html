@@ -33,7 +33,6 @@ body {
   padding: 20px;
 }
 </style>
-</head>
 <!-- found at https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_inline_form -->
 
 <body>
@@ -83,7 +82,7 @@ body {font-family:"Poppins", sans-serif;}
   }
 }
 </style>
-</head>
+
 
 
 
@@ -108,6 +107,7 @@ body {font-family:"Poppins", sans-serif;}
         <div class="overlay p-5">
           <h1 class="display mb-4">
           </h1>
+          <p class="w3-center"> Welcome {{ user.username|title }}, search for your next home! </p>
           <div class="search">
             <form class="form-inline" action="{% url 'search_results' %}">
 
