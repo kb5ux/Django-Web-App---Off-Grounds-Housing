@@ -1,4 +1,3 @@
-
 # Django is needed to run Django
 Django
 
