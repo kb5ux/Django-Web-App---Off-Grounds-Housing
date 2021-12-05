@@ -80,7 +80,7 @@ def ListingDetails(request, id):
 
     if average_rating is None:
         average_rating = 0
-    average_rating = round(average_rating, 2)
+    average_rating = round(average_rating, 1)
     context = {
         "listing": listing,
         "reviews": reviews,

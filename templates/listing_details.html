@@ -54,6 +54,24 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: royalblue;
 }
+
+a.button{
+  color: #2da1c1;
+  font-size: 15px;
+  text-decoration: none;
+  left: 252px;
+  float: right;
+
+}
+a.button:hover
+{
+color: #f90;
+text-decoration: underline;
+left: 252px;
+float: right;
+}
+
+
 </style>
 <body>
 
@@ -86,7 +104,7 @@ input[type=submit]:hover {
                     <i></i> Bathrooms: {{ listing.bathrooms }}
                 </div>
                 <div>
-                    <h5 class="text-center"> Rating: {{ average_rating }}</h5>
+                    <h5 class="text-center"> Rating: {{ average_rating }}/10</h5>
                 </div>
             </div>
         </div>
@@ -119,22 +137,34 @@ input[type=submit]:hover {
         {% endif %}
     </div>
     <br>
+
+
+
+
+<!-- Card Feature found at https://getbootstrap.com/docs/5.0/components/card/ -->
+
     <div>
         <div>
             <h3 class="text-center">Reviews</h3>
                 {% for review in reviews %}
-                    <div>
-                       <h5> {{ review.description }} - {{ review.rating }} </h5>
-                        <h5> </h5>
+
+                    <div class="card">
+                        <h5 class="card-header"> <b>Rating: </b>{{ review.rating }}/10</h5>
+                        <div class="card-body">
+                            <h5 class="card-title"> <font size="-1.5"> <b>User: </b>{{ user.username }}</font></h5>
+                            <p class="card-text"> <font size="-0.25"> <b>Review: </b>{{ review.description }}</font></p>
+                        </div>
                     </div>
-                <br>
                 {% endfor %}
         </div>
-        <div class="fixed-bottom">
-            <a href="{% url 'listing' %}" class = "btn btn-warning btn-rounded">Back to Browse Listings</a>
 
-        </div>
+        <a class="button" style="font-family:'Arial'" href="{% url 'listing' %}">Back to Browse Listings</a>
+
+
+
     </div>
+
+
 </div>
 </body>
 
