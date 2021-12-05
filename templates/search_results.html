@@ -3,6 +3,26 @@
 {% block title %} | Search Results {% endblock %}
 
 {% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+a.button{
+  color: #2da1c1;
+  font-size: 18px;
+  text-decoration: none;
+  left: 252px;
+  float: right;
+
+}
+a.button:hover
+{
+color: #f90;
+text-decoration: underline;
+left: 252px;
+float: right;
+}
+</style>
+
+
 <section>
   <h1 class="w3-center"> Available Listings For Search Criteria: {{listings|length}} </h1>
     <div class="w3-container">
@@ -54,7 +74,8 @@
           {% endfor %}
         {% else %}
           <div>
-            <h1 class="text-center">No Listings Available For Selected Criteria</h1>
+
+             <a class="button" style="font-family:'Arial'" href="{% url 'home_page' %}">Try Another Search</a>
           </div>
         {% endif %}
       </div>

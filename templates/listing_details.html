@@ -84,7 +84,7 @@ float: right;
             </div>
             <div >
                 <h3 class="text-center">
-                   <p>{{ listing.title }} - ${{ listing.price }}</p>
+                    <u><p>{{ listing.title }} - ${{ listing.price }}</p></u>
                 </h3>
                  <div class="content-section" align="center">
                         <div class="media">
@@ -93,16 +93,16 @@ float: right;
                             {% endif %}
                         </div>
                  </div>
-                <h5 class="text-center">Street Address: {{ listing.street_address }}</h5>
+                <h5 class="text-center">Street Address: <font size="-0.75">{{ listing.street_address }}</font></h5>
                 <hr>
                 <div>
-                      <b>Description:</b> {{ listing.description }}
+                      <b>Description:</b> <font size="-0.75">{{ listing.description }}</font>
                 </div>
                 <div>
-                    <b>Bedrooms:</b> {{ listing.bedrooms }}
+                    <b>Bedrooms:</b> <font size="-0.75">{{ listing.bedrooms }}</font>
                 </div>
                 <div>
-                    <b>Bathrooms:</b> {{ listing.bathrooms }}
+                    <b>Bathrooms:</b> <font size="-0.75">{{ listing.bathrooms }}</font>
                 </div>
                 <hr>
                 <div>
@@ -117,7 +117,7 @@ float: right;
     <div class="text-center">
         {% if user.is_authenticated %}
         <div>
-            <h3 class="text-center"> <b>Add Review </b></h3>
+            <h3 class="text-center"> <u><b>Add Review </b></u></h3>
             <form class="w3-container" action="{% url 'add_review' listing.id %}" method="POST">
                 {% csrf_token %}
                 <label for="description">Review</label>
@@ -150,7 +150,7 @@ float: right;
 
     <div>
         <div>
-            <h3 class="text-center"> <b>Reviews </b></h3>
+            <h3 class="text-center"> <u><b>Reviews </b></u></h3>
                 {% for review in reviews %}
 
                     <div class="card">
