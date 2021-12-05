@@ -75,7 +75,7 @@ float: right;
 </style>
 <body>
 
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <br>
     <div>
         <div>
@@ -94,6 +94,7 @@ float: right;
                         </div>
                  </div>
                 <h5 class="text-center">Street Address: {{ listing.street_address }}</h5>
+                <hr>
                 <div>
                       <b>Description:</b> {{ listing.description }}
                 </div>
@@ -103,8 +104,9 @@ float: right;
                 <div>
                     <b>Bathrooms:</b> {{ listing.bathrooms }}
                 </div>
+                <hr>
                 <div>
-                    <h5 class="text-center"> Rating: {{ average_rating }}/10</h5>
+                    <h5 class="text-center"> <b>Rating: </b> {{ average_rating }}/10</h5>
                 </div>
             </div>
         </div>
@@ -115,7 +117,7 @@ float: right;
     <div class="text-center">
         {% if user.is_authenticated %}
         <div>
-            <h3 class="text-center">Add Review</h3>
+            <h3 class="text-center"> <b>Add Review </b></h3>
             <form class="w3-container" action="{% url 'add_review' listing.id %}" method="POST">
                 {% csrf_token %}
                 <label for="description">Review</label>
@@ -145,7 +147,7 @@ float: right;
 
     <div>
         <div>
-            <h3 class="text-center">Reviews</h3>
+            <h3 class="text-center"> <b>Reviews </b></h3>
                 {% for review in reviews %}
 
                     <div class="card">
