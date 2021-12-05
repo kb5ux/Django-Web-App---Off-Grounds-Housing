@@ -21,7 +21,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-     path('', include('housing.urls')),
+     path('', TemplateView.as_view(template_name="index.html")),
+     path('housing/', include('housing.urls')),
      path('admin/', admin.site.urls),
      path('accounts/', include('allauth.urls')),
      path('logout', LogoutView.as_view()),
