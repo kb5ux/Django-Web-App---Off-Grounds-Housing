@@ -135,7 +135,10 @@ float: right;
             </form>
         </div>
         {% else %}
-            <a href="{% provider_login_url 'google' %}">Login With Google To Add Review</a>
+            <div class="container">
+                <img src="/media/images/google.png" height="150" width="200" >
+                <a href="{% provider_login_url 'google' %}?next={{ request.path }}">Login With Google To Add Review</a>
+            </div>
         {% endif %}
     </div>
     <br>
