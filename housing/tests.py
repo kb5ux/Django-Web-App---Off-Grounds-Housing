@@ -42,13 +42,13 @@ class MainPageViewTest(TestCase):
 
 class SearchResultsViewTest(TestCase):
     def test_resultsPage(self):
-        response = self.client.get('/housing/search_results/')
+        response = self.client.get('/search_results/')
         self.assertEqual(response.status_code, 200)
 
 
 class ListingPageViewTest(TestCase):
     def test_listingPage(self):
-        response = self.client.get('/housing/listings/')
+        response = self.client.get('/listings/')
         self.assertEqual(response.status_code, 200)
 
 
