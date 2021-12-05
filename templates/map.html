@@ -42,6 +42,7 @@
           .setLngLat(feature.geometry.coordinates)
           .setHTML(
             `<h3>${feature.properties.title}</h3>
+            <p><strong>Price: $</strong>${feature.properties.price}</p>
             <p><strong>Location: </strong>${feature.properties.place_name}</p>
             <p><strong>Description: </strong>${feature.properties.description}</p>
             <p><strong>Bedrooms: </strong>${feature.properties.bedrooms}</p>
