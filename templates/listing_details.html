@@ -84,7 +84,7 @@ float: right;
             </div>
             <div >
                 <h3 class="text-center">
-                   <p>{{ listing.title }}</p>
+                   <p>{{ listing.title }} - ${{ listing.price }}</p>
                 </h3>
                  <div class="content-section" align="center">
                         <div class="media">
@@ -95,13 +95,13 @@ float: right;
                  </div>
                 <h5 class="text-center">Street Address: {{ listing.street_address }}</h5>
                 <div>
-                      <i></i> Description: {{ listing.description }}
+                      <b>Description:</b> {{ listing.description }}
                 </div>
                 <div>
-                    <i></i> Bedrooms: {{ listing.bedrooms }}
+                    <b>Bedrooms:</b> {{ listing.bedrooms }}
                 </div>
                 <div>
-                    <i></i> Bathrooms: {{ listing.bathrooms }}
+                    <b>Bathrooms:</b> {{ listing.bathrooms }}
                 </div>
                 <div>
                     <h5 class="text-center"> Rating: {{ average_rating }}/10</h5>

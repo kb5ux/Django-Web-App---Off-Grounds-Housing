@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<h1 class="w3-center"> Available Listings: {{listings|length}} </h1>
 <div class="container" xmlns="http://www.w3.org/1999/html">
       <div class="row">
           {% for listing in listings %}
@@ -30,7 +31,7 @@
                   <hr>
                   <div>
                     <div class="text-center">
-                      <p> Description: {{ listing.description }}</p>
+                      <p> <b> Description: </b> {{ listing.description }} </p>
                         <a href="{% url 'listing_details' listing.id %}">More Details</a>
                       <i></i> </div>
                   </div>

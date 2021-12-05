@@ -4,6 +4,7 @@
 
 {% block content %}
 <section>
+  <h1 class="w3-center"> Available Listings For Search Criteria: {{listings|length}} </h1>
     <div class="w3-container">
       <div class="w3-row">
         {% if listings %}
@@ -33,7 +34,7 @@
                   <hr>
                   <div>
                     <div>
-                      <p class="text-center"> Description: {{ listing.description }}</p>
+                      <p class="text-center"> <b>Description:</b> {{ listing.description }}</p>
                     </div>
                     <div class="text-center">
                       <a href="{% url 'listing_details' listing.id %}">More Details</a>
