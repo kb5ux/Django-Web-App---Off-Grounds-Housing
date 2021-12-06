@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import datetime
 
-from django.urls import reverse
+
 from django.utils import timezone
 
 from allauth.socialaccount.providers.google.provider import GoogleProvider
@@ -53,22 +53,39 @@ class ListingPageViewTest(TestCase):
 
 
 class ListingPageTest(TestCase):
-    def test_incorrectimage(self):
+    def test_IncorrectImage(self):
         example_listing = Listing(title='Preston Apartments',
                                   image='https://img.offcampusimages.com/WgKq5tNLRIlQ_LylG-6iNPg4_U8=/660x440/left/top/smart/images/ecuyiiqoqaipb7j_op5cirqf4hphpcvvltyry0an_xu.jpeg',
                                   bedrooms=4, square_feet=100, price=850)
         self.assertNotEqual(example_listing.image,
                             'https://img.offcampusimages.com/jWIDBfVflruISincDyFIjbhOMN4=/660x440/left/top/smart/images/mytnhdxke4fzlwt2qojoi5pprmokqbwia293dmuna2s.jpeg')
 
-    def test_correctprice(self):
+    def test_Price(self):
+        example = Listing(title="Grandmarc at the Corner 4 Bedroom", price=1000, street_address='301 15th St NW',
+                          city='Charlottesville', bedrooms=4, bathrooms=2, square_feet=2000)
         another_example = Listing(title="Grandmarc at the Corner 4 Bedroom", price=900, street_address='301 15th St NW',
                                   city='Charlottesville', bedrooms=4, bathrooms=2, square_feet=2000)
-        price_listing = another_example.price
-        self.assertEqual(price_listing, 900)
+        price = another_example.price
+        self.assertEqual(price, 900)
+        self.assertNotEqual(example.price, 900)
+
+    def test_BedRooms(self):
+        example = Listing(title="Grandmarc at the Corner 4 Bedroom", price=900, street_address='301 15th St NW',
+                                  city='Charlottesville', bedrooms=4, bathrooms=2, square_feet=2000)
+        bedrooms = example.bedrooms
+        self.assertEqual(bedrooms, 4)
+        self.assertNotEqual(bedrooms, 2)
+
+    def test_BathRooms(self):
+        example = Listing(title="Grandmarc at the Corner 4 Bedroom", price=900, street_address='301 15th St NW',
+                                  city='Charlottesville', bedrooms=4, bathrooms=2, square_feet=2000)
+        bathrooms = example.bathrooms
+        self.assertEqual(bathrooms, 2)
+        self.assertNotEqual(bathrooms, 4)
 
 
 class AddReviewTest(TestCase):
-    def test_correctrating(self):
+    def test_Rating(self):
         location = Listing(title="Grandmarc at the Corner 4 Bedroom", price=900, street_address='301 15th St NW',
                                   city='Charlottesville', bedrooms=4, bathrooms=2, square_feet=2000)
         review_added = Review(listing=location, description="This place sucks!", rating=1.5)
